@@ -10,7 +10,7 @@
 ● Selezionare i paganti che abbiano un ospite id associato
     SELECT *
     FROM `paganti`
-    WHERE `ospite_id`;
+    WHERE `ospite_id`; // oppure `ospite_id` IS NOT NULL
 
 ● Selezionare tutte le stanze del primo piano
     SELECT *
@@ -20,14 +20,27 @@
 ● Selezionare tutti gli ospiti che iniziano per E
     SELECT *
     FROM `ospiti`
-    WHERE SUBSTRING(`name`, 1, 1) = "E";
+    WHERE SUBSTRING(`name`, 1, 1) = "E"; // `name` LIKE "e%"
 
 ● Selezionare tutti gli ospiti che abbiano meno di 30 anni
-    SELECT *
+    SELECT
+    *, TIMESTAMPDIFF(YEAR,`date_of_birth`, NOW()) AS age
     FROM `ospiti`
-    WHERE `date_of_birth` >= "1991-03-08";
+    WHERE TIMESTAMPDIFF(YEAR,`date_of_birth`, NOW()) < 30;
 
 ● Seleziona tutte le prenotazioni precedenti a maggio 2018
-  SELECT *
-  FROM `prenotazioni`
-  WHERE `created_at` < "2018-05-01";
+    SELECT *
+    FROM `prenotazioni`
+    WHERE `created_at` < "2018-05-01";
+
+● Selezionare i paganti e i relativi dati ospite
+    SELECT *
+    FROM `paganti`
+    LEFT JOIN `ospiti`
+    ON paganti.ospite_id = ospiti.id;
+
+● Selezionare tutti i pagamenti con i dati relativi alla prenotazione
+    SELECT *
+    FROM `pagamenti`
+    JOIN `prenotazioni`
+    ON pagamenti.prenotazione_id = prenotazioni.id;

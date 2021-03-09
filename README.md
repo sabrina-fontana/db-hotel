@@ -1,4 +1,4 @@
-# DB HOTEL\
+# DB HOTEL
 ## diagramma
 Ci sono varie **stanze**, ognuna con le proprie caratteristiche.\
 Le diverse stanze vengono **prenotate** per periodi di tempo, da ospiti.\
